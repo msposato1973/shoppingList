@@ -15,18 +15,18 @@ public class ShoppingBasket extends AbsShoppingBasket{
     private static double total;
     
  
-    @Override
+     @Override
     public double computePrice() {
         
     	total = 0;
     	this.basketContents.entrySet().stream().forEach(e -> {
     		BasketItem itemDetails = getItem(e.getKey())  ;
 	    		if (itemDetails == null) {
-	                System.out.println("The item: "+ e + ", not found in our inventory!");
-	                total += (itemDetails == null) ? 0 : itemDetails.getPricePerQuantity(e.getValue());
-	            } else {
-	            	 total += itemDetails.getPricePerQuantity(e.getValue());
-	            }
+	                	System.out.println("The item: "+ e + ", not found in our inventory!");
+	               		total +=  0 ;
+	            	} else {
+	            		 total += itemDetails.getPricePerQuantity(e.getValue());
+	            	}
 		    }
 		);
     	
