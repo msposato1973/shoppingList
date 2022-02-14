@@ -12,25 +12,24 @@ public class ShoppingBasket extends AbsShoppingBasket{
         setBasketContents(groupByItem(list));
     }
 
-    private static double total;
+    
     
  
-     @Override
+    @Override
     public double computePrice() {
         
-    	total = 0;
-    	this.basketContents.entrySet().stream().forEach(e -> {
-    		BasketItem itemDetails = getItem(e.getKey())  ;
-	    		if (itemDetails == null) {
-	                	System.out.println("The item: "+ e + ", not found in our inventory!");
-	               		total +=  0 ;
-	            	} else {
-	            		 total += itemDetails.getPricePerQuantity(e.getValue());
-	            	}
-		    }
-		);
+    	double total = 0;
     	
-    	 
+    	for (Map.Entry<String, Long> purchasedItem : this.basketContents.entrySet()) {
+        	BasketItem itemDetails = getItem(purchasedItem.getKey())  ;  
+        	if (itemDetails == null) {
+                System.out.println("The item: "+ purchasedItem+ ", not found in our inventory!");
+                total += 0;
+            } else {
+            	 total += itemDetails.getPricePerQuantity(purchasedItem.getValue());
+            }
+        }
+        
         System.out.println("total: "+ total);
         return total;
     }
